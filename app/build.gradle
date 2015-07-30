@@ -1,4 +1,24 @@
 apply plugin: 'com.android.application'
+apply plugin: "sonar-runner"
+apply plugin: 'android-apt'
+
+def AAVersion = '3.3.2'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+        resourcePackageName 'za.co.be.rettakid.facemap'
+    }
+}
 
 android {
     compileSdkVersion 22
@@ -17,9 +37,58 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+        xmlReport true
+        xmlOutput file("lint-report.xml")
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+
+    compile(project(':libraries:slidingmenu')) {
+        exclude module: "com.android.support:appcompat-v7"
+    }
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+
+    /*Unit Testing*/
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.projectKey","za.co.be.rettakid.facemap"
+        property "sonar.projectName","face-map"
+        property "sonar.projectVersion","1.0"
+
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.analysis.mode", "analysis"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.scm.provider","git"
+
+        property "sonar.sources","src/main/java"
+        property "sonar.tests","src/androidTest/java"
+
+        property "sonar.sourceEncoding","UTF-8"
+    }
+}
+
+subprojects {
+    sonarRunner {
+        sonarProperties {
+            properties["sonar.sources"] += "src/main/java"
+            properties["sonar.tests"] += "src/androidTest/java"
+        }
+    }
 }
