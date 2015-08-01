@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="za.co.be.rettakid.facemap" >
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".fragments.Camera"
+            android:name=".fragments.CameraActivity_"
             android:label="@string/title_activity_camera" >
         </activity>
     </application>
