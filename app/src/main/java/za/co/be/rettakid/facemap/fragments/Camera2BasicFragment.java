@@ -477,7 +477,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
                 return;
             }
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception",e);
         } catch (NullPointerException e) {
             // Currently an NPE is thrown when the Camera2API is used but not supported on the
             // device this code runs.
@@ -499,7 +499,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
             }
             manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
         }
@@ -549,7 +549,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
             mBackgroundThread = null;
             mBackgroundHandler = null;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         }
     }
 
@@ -598,7 +598,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
                                 mCaptureSession.setRepeatingRequest(mPreviewRequest,
                                         mCaptureCallback, mBackgroundHandler);
                             } catch (CameraAccessException e) {
-                                e.printStackTrace();
+                                Log.e(TAG, "camera exception", e);
                             }
                         }
 
@@ -609,7 +609,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
                     }, null
             );
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         }
     }
 
@@ -666,7 +666,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
             mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback,
                     mBackgroundHandler);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         }
     }
 
@@ -684,7 +684,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
             mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback,
                     mBackgroundHandler);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         }
     }
 
@@ -727,7 +727,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
             mCaptureSession.stopRepeating();
             mCaptureSession.capture(captureBuilder.build(), CaptureCallback, null);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         }
     }
 
@@ -748,7 +748,7 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
             mCaptureSession.setRepeatingRequest(mPreviewRequest, mCaptureCallback,
                     mBackgroundHandler);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "camera exception", e);
         }
     }
 
@@ -801,14 +801,14 @@ public class Camera2BasicFragment extends Fragment implements View.OnClickListen
                 output = new FileOutputStream(mFile);
                 output.write(bytes);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "camera exception", e);
             } finally {
                 mImage.close();
                 if (null != output) {
                     try {
                         output.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Log.e(TAG, "camera exception", e);
                     }
                 }
             }
