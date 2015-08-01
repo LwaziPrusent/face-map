@@ -1,1 +1,1 @@
-include ':app', ':libraries', ':libraries:slidingmenu'
+include ':app', ':libraries', ':libraries:slidingmenu', ':libraries:openCVLibrary300'

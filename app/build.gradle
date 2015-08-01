@@ -58,6 +58,9 @@ dependencies {
     compile(project(':libraries:slidingmenu')) {
         exclude module: "com.android.support:appcompat-v7"
     }
+    compile(project(':libraries:openCVLibrary300')) {
+        exclude module: "com.android.support:appcompat-v7"
+    }
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
