@@ -15,14 +15,35 @@ android:layout_height="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-
+            android:id="@+id/imgLeftControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
             android:contentDescription="@string/picture"
             android:src="@drawable/ic_launcher"
+            android:layout_marginEnd="49dp"
             android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/imgTopControl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/picture"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginTop="83dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:id="@+id/faceContainer"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#32fff400">
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>
